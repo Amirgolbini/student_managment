@@ -1,4 +1,6 @@
 import tkinter as tk
+from students import Person
+import tkinter.messagebox as messagebox
 
 
 class StudentManagementApp(tk.Tk):
@@ -40,6 +42,53 @@ class StudentManagementApp(tk.Tk):
 
         self.entry_email = tk.Entry(self)
         self.entry_email.grid(row=4, column=1, padx=10, pady=10)
+
+        btn_add = tk.Button(self, text='Add student:', command=self.add_student)
+        btn_add.grid(row=5, column=0, padx=10, pady=10)
+
+        btn_edit = tk.Button(self, text='Edit student:', command=self.edit_student)
+        btn_edit.grid(row=5, column=1, padx=10, pady=10)
+
+        btn_view = tk.Button(self, text='View student', command=self.view_student)
+        btn_view.grid(row=6, column=0, padx=10, pady=10)
+
+        btn_delete = tk.Button(self, text='delet Student', command=self.del_student)
+        btn_delete.grid(row=6, column=0, padx=10, pady=10)
+
+        btn_clear = tk.Button(self, text='Clear student', command=self.clear_entries)
+        btn_clear.grid(row=7, column=0, padx=10, pady=10)
+
+    def add_student(self):
+        meli = self.entry_id.get()
+        first_name = self.entry_first_name.get()
+        last_name = self.entry_last_name.get()
+        age = self.entry_age.get()
+        email = self.entry_email.get()
+
+        if meli and first_name and last_name and email:
+            person = Person(meli, first_name, last_name, age, email)
+            messagebox.showinfo("success", "Student added successfully!")
+            # self.database.add_student(person)
+            self.clear_entries()
+
+        else:
+            messagebox.showwarning('Error', "Please fill in all the fields ")
+
+    def edit_student(self):
+        pass
+
+    def view_student(self):
+        pass
+
+    def del_student(self):
+        pass
+
+    def clear_entries(self):
+        self.entry_id.delete((0, tk.END))
+        self.entry_first_name.delete(0, tk.END)
+        self.entry_last_name.delete(0, tk.END)
+        self.entry_age.delete(0, tk.END)
+        self.entry_email.delete((0, tk.END))
 
 
 if __name__ == '__main__':
