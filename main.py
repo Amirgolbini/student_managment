@@ -84,13 +84,13 @@ class StudentManagementApp(tk.Tk):
         pass
 
     def clear_entries(self):
-        self.entry_id.delete((0, tk.END))
+        self.entry_id.delete((0, tk.END)
         self.entry_first_name.delete(0, tk.END)
         self.entry_last_name.delete(0, tk.END)
         self.entry_age.delete(0, tk.END)
-        self.entry_email.delete((0, tk.END))
-
+        self.entry_email.delete((0, tk.END)
 
 if __name__ == '__main__':
+
     app = StudentManagementApp()
     app.mainloop()
