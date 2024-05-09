@@ -61,7 +61,7 @@ class StudentManagementApp(tk.Tk):
         btn_clear.grid(row=7, column=0, padx=10, pady=10)
 
         # Load image
-        image = Image.open("F:/J/amir.jpg")
+        image = Image.open("F:/J/IMG_۲۰۲۰۰۷۱۷_۲۰۱۵۰۲.jpg")
         image = image.resize((200, 200))  # Resize the image
         photo = ImageTk.PhotoImage(image)
 
