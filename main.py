@@ -10,30 +10,30 @@ class StudentManagementApp(tk.Tk):
         super().__init__()
 
         self.title("Student Management System")
-        self.geometry("650x450")
-        self.configure(bg="red")
+        self.geometry("800x450")
+        self.configure(bg="#ADD8E6")
         self.create_widgets()
         self.database = Database()
 
     # label field
     def create_widgets(self):
-        lbl_id = tk.Label(self, text='Meli code:', bg="yellow", fg="black")
+        lbl_id = tk.Label(self, text='Meli code:', bg="#9932CC", fg="white")
         lbl_id.grid(row=0, column=0, padx=10, pady=10)
 
-        lbl_first_name = tk.Label(self, text='Firts name:', bg="yellow", fg="black")
+        lbl_first_name = tk.Label(self, text='Firts name:', bg="#9932CC", fg="white")
         lbl_first_name.grid(row=1, column=0, padx=10, pady=10)
 
-        lbl_last_name = tk.Label(self, text='last name:', bg="yellow", fg="black")
+        lbl_last_name = tk.Label(self, text='last name:', bg="#9932CC", fg="white")
         lbl_last_name.grid(row=2, column=0, padx=10, pady=10)
 
-        lbl_age = tk.Label(self, text='AGE:', bg="yellow", fg="black")
+        lbl_age = tk.Label(self, text='AGE:', bg="#9932CC", fg="white")
         lbl_age.grid(row=3, column=0, padx=10, pady=10)
 
-        lbl_email = tk.Label(self, text='Email;', bg="yellow", fg="black")
+        lbl_email = tk.Label(self, text='Email;', bg="#9932CC", fg="white")
         lbl_email.grid(row=4, column=0, padx=10, pady=10)
 
         self.entry_id = tk.Entry(self, width=50)
-        self.entry_id.grid(row=0, column=1, padx=10, pady=10, )
+        self.entry_id.grid(row=0, column=1, padx=10, pady=10)
 
         self.entry_first_name = tk.Entry(self, width=50)
         self.entry_first_name.grid(row=1, column=1, padx=10, pady=10)
@@ -62,15 +62,14 @@ class StudentManagementApp(tk.Tk):
         btn_clear = tk.Button(self, text='Clear student', command=self.clear_entries, bg="blue", fg="white")
         btn_clear.grid(row=7, column=0, padx=10, pady=10)
 
-        # # Load image
-        # image = Image.open("F:/J/IMG_۲۰۲۰۰۷۱۷_۲۰۱۵۰۲.jpg")
-        # image = image.resize((200, 200))  # Resize the image
-        # photo = ImageTk.PhotoImage(image)
-        #
-        # # Create a label to display the image
-        # image_label = tk.Label(self, image=photo)
-        # image_label.image = photo  # Keep a reference to the image to prevent garbage collection
-        # image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=10)
+        image = Image.open("F:/J/IMG_۲۰۲۰۰۷۱۷_۲۰۱۵۰۲.jpg")
+        image = image.resize((350, 200))  # Resize the image
+        photo = ImageTk.PhotoImage(image)
+
+        # Create a label to display the image
+        image_label = tk.Label(self, image=photo)
+        image_label.image = photo  # Keep a reference to the image to prevent garbage collection
+        image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=10)
 
     def add_student(self):
         meli = self.entry_id.get()
@@ -81,10 +80,9 @@ class StudentManagementApp(tk.Tk):
 
         if meli and first_name and last_name and email:
             person = Person(meli, first_name, last_name, age, email)
-            #messagebox.showinfo("success", "Student added successfully!")
             self.database.add_student(person)
             self.clear_entries()
-
+            # messagebox.showinfo("Success", "Student added successfully!")
         else:
             messagebox.showwarning('Error', "Please fill in all the fields ")
 
@@ -93,29 +91,27 @@ class StudentManagementApp(tk.Tk):
 
     def view_student(self):
         view_window = tk.Toplevel(self)
-        view_window.title("view Student")
+        view_window.title("View Student")
 
-        title_lable = tk.Label(view_window, text="All Students",font=("ARIAL",16))
-        title_lable.pack(pady=10)
+        title_label = tk.Label(view_window, text="All Students", font=("ARIAL", 16))
+        title_label.pack(pady=10)
 
-        student_grid = Treeview(view_window,columns=("meli", "first_name","last_name","age","email"),
+        student_grid = Treeview(view_window, columns=("meli", "first_name", "last_name", "age", "email"),
                                 show="headings")
 
         student_grid.heading("meli", text="Meli Code")
-        student_grid.heading("first_name",text="first_name")
-        student_grid.heading("last_name",text="last_name")
-        student_grid.heading("age",text="age")
-        student_grid.heading("email",text="email")
+        student_grid.heading("first_name", text="First Name")
+        student_grid.heading("last_name", text="Last Name")
+        student_grid.heading("age", text="Age")
+        student_grid.heading("email", text="Email")
         student_grid['show'] = 'headings'
 
         students = self.database.get_all_student()
 
-        for student in students :
-            student_grid.insert("",tk.END,values=student)
+        for student in students:
+            student_grid.insert("", tk.END, values=student)
 
-        student_grid.pack(fill=tk.BOTH,expand=True)
-
-
+        student_grid.pack(fill=tk.BOTH, expand=True)
 
     def del_student(self):
         pass
@@ -126,7 +122,6 @@ class StudentManagementApp(tk.Tk):
         self.entry_last_name.delete(0, tk.END)
         self.entry_age.delete(0, tk.END)
         self.entry_email.delete(0, tk.END)
-
 
 if __name__ == '__main__':
     app = StudentManagementApp()
