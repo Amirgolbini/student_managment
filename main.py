@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 from students import Person
 import tkinter.messagebox as messagebox
 from db import Database
+from ttkbootstrap import Treeview
 
 class StudentManagementApp(tk.Tk):
     def __init__(self):
@@ -56,7 +57,7 @@ class StudentManagementApp(tk.Tk):
         btn_view.grid(row=6, column=0, padx=10, pady=10)
 
         btn_delete = tk.Button(self, text='delet Student', command=self.del_student, bg="blue", fg="white")
-        btn_delete.grid(row=6, column=0, padx=10, pady=10)
+        btn_delete.grid(row=6, column=1, padx=10, pady=10)
 
         btn_clear = tk.Button(self, text='Clear student', command=self.clear_entries, bg="blue", fg="white")
         btn_clear.grid(row=7, column=0, padx=10, pady=10)
@@ -91,7 +92,30 @@ class StudentManagementApp(tk.Tk):
         pass
 
     def view_student(self):
-        pass
+        view_window = tk.Toplevel(self)
+        view_window.title("view Student")
+
+        title_lable = tk.Label(view_window, text="All Students",font=("ARIAL",16))
+        title_lable.pack(pady=10)
+
+        student_grid = Treeview(view_window,columns=("meli", "first_name","last_name","age","email"),
+                                show="headings")
+
+        student_grid.heading("meli", text="Meli Code")
+        student_grid.heading("first_name",text="first_name")
+        student_grid.heading("last_name",text="last_name")
+        student_grid.heading("age",text="age")
+        student_grid.heading("email",text="email")
+        student_grid['show'] = 'headings'
+
+        students = self.database.get_all_student()
+
+        for student in students :
+            student_grid.insert("",tk.END,values=student)
+
+        student_grid.pack(fill=tk.BOTH,expand=True)
+
+
 
     def del_student(self):
         pass
