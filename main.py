@@ -2,7 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from students import Person
 import tkinter.messagebox as messagebox
-
+from db import Database
 
 class StudentManagementApp(tk.Tk):
     def __init__(self):
@@ -12,6 +12,7 @@ class StudentManagementApp(tk.Tk):
         self.geometry("650x450")
         self.configure(bg="red")
         self.create_widgets()
+        self.database = Database()
 
     # label field
     def create_widgets(self):
@@ -60,15 +61,15 @@ class StudentManagementApp(tk.Tk):
         btn_clear = tk.Button(self, text='Clear student', command=self.clear_entries, bg="blue", fg="white")
         btn_clear.grid(row=7, column=0, padx=10, pady=10)
 
-        # Load image
-        image = Image.open("F:/J/IMG_۲۰۲۰۰۷۱۷_۲۰۱۵۰۲.jpg")
-        image = image.resize((200, 200))  # Resize the image
-        photo = ImageTk.PhotoImage(image)
-
-        # Create a label to display the image
-        image_label = tk.Label(self, image=photo)
-        image_label.image = photo  # Keep a reference to the image to prevent garbage collection
-        image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=10)
+        # # Load image
+        # image = Image.open("F:/J/IMG_۲۰۲۰۰۷۱۷_۲۰۱۵۰۲.jpg")
+        # image = image.resize((200, 200))  # Resize the image
+        # photo = ImageTk.PhotoImage(image)
+        #
+        # # Create a label to display the image
+        # image_label = tk.Label(self, image=photo)
+        # image_label.image = photo  # Keep a reference to the image to prevent garbage collection
+        # image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=10)
 
     def add_student(self):
         meli = self.entry_id.get()
@@ -79,8 +80,8 @@ class StudentManagementApp(tk.Tk):
 
         if meli and first_name and last_name and email:
             person = Person(meli, first_name, last_name, age, email)
-            messagebox.showinfo("success", "Student added successfully!")
-            # self.database.add_student(person)
+            #messagebox.showinfo("success", "Student added successfully!")
+            self.database.add_student(person)
             self.clear_entries()
 
         else:
