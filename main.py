@@ -11,25 +11,25 @@ class StudentManagementApp(tk.Tk):
 
         self.title("Student Management System")
         self.geometry("800x450")
-        self.configure(bg="#ADD8E6")
+        self.configure(bg="cadet blue")
         self.create_widgets()
         self.database = Database()
 
     # label field
     def create_widgets(self):
-        lbl_id = tk.Label(self, text='Meli code:', bg="#9932CC", fg="white")
+        lbl_id = tk.Label(self, text='Meli code:', bg="firebrick1", fg="white")
         lbl_id.grid(row=0, column=0, padx=10, pady=10)
 
-        lbl_first_name = tk.Label(self, text='Firts name:', bg="#9932CC", fg="white")
+        lbl_first_name = tk.Label(self, text='Firts name:', bg="firebrick1", fg="white")
         lbl_first_name.grid(row=1, column=0, padx=10, pady=10)
 
-        lbl_last_name = tk.Label(self, text='last name:', bg="#9932CC", fg="white")
+        lbl_last_name = tk.Label(self, text='last name:', bg="firebrick1", fg="white")
         lbl_last_name.grid(row=2, column=0, padx=10, pady=10)
 
-        lbl_age = tk.Label(self, text='AGE:', bg="#9932CC", fg="white")
+        lbl_age = tk.Label(self, text='AGE:', bg="firebrick1", fg="white")
         lbl_age.grid(row=3, column=0, padx=10, pady=10)
 
-        lbl_email = tk.Label(self, text='Email;', bg="#9932CC", fg="white")
+        lbl_email = tk.Label(self, text='Email;', bg="firebrick1", fg="white")
         lbl_email.grid(row=4, column=0, padx=10, pady=10)
 
         self.entry_id = tk.Entry(self, width=50)
